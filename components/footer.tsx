@@ -21,8 +21,20 @@ export function Footer() {
             </a>
           </nav>
           
-          {/* Copyright */}
-          <p className="font-sans text-sm text-offwhite/40">
+          {/* Support & Info */}
+          <div className="flex flex-col items-end gap-2">
+            <a href="mailto:support@straverso.com" className="font-sans text-sm text-offwhite/60 hover:text-coral transition-colors">
+              Support: support@straverso.com
+            </a>
+            <p className="font-sans text-xs text-offwhite/40">
+              Org nr: 937 560 834 | D-U-N-S: 348438692
+            </p>
+          </div>
+        </div>
+        
+        {/* Copyright */}
+        <div className="border-t border-lavender/10 mt-8 pt-8">
+          <p className="font-sans text-sm text-offwhite/40 text-center">
             © {new Date().getFullYear()} Straverso. Alle rettigheter reservert.
           </p>
         </div>
