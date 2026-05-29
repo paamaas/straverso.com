@@ -41,7 +41,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="font-sans text-xl md:text-2xl text-offwhite/80 mb-4 tracking-wide"
         >
-          Vi vender lagene. Finner løsningen.
+          Vi gjør det komplekse enkelt og intuitivt.
         </motion.p>
 
         <motion.p
@@ -50,7 +50,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="font-sans text-sm md:text-base text-lavender/70 mb-12 italic"
         >
-          We turn the layers. Find the solution.
+          We make the complex simple and intuitive.
         </motion.p>
 
         <motion.div

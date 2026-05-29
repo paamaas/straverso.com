@@ -78,11 +78,11 @@ export function ContactSection() {
           </span>
           <div className="w-16 h-px bg-lavender/30 mt-4 mb-8 mx-auto" />
           <h2 className="font-serif text-3xl md:text-5xl text-offwhite mb-6">
-            La oss snakke
+            La oss ta en prat
           </h2>
           <p className="font-sans text-offwhite/60 mb-12 max-w-lg mx-auto">
-            Har du et problem som trenger å løses? Eller bare nysgjerrig på hva vi bygger? 
-            Vi hører gjerne fra deg.
+            Har du en nisje, arbeidsflyt eller produktidé som fortjener en bedre digital løsning?
+            Ta gjerne kontakt – enten du er nysgjerrig på produktene våre eller vil diskutere et konkret behov.
           </p>
         </motion.div>
 

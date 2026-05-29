@@ -8,13 +8,13 @@ const founders = [
   {
     name: "Jo Henning Kolstad",
     role: "Partner",
-    bio: "Bakgrunn innen salg og markedsføring. Veien til glede er løsninger som treffer hjertet",
+    bio: "Bakgrunn innen salg, markedsføring og kommersiell utvikling. Jobber med posisjonering, brukerbehov og hvordan produktene skal nå markedet.",
     initial: "G1"
   },
   {
     name: "Paal Aamaas",
     role: "Partner",
-    bio: "Fullstack-utvikler med bakgrunn innen AI, forretningsutvikling og markedsføring. Tror på å løse problemene andre ikke klarer.",
+    bio: "Fullstack-utvikler med erfaring innen AI, produktutvikling, forretningsutvikling og markedsføring. Jobber med teknisk arkitektur, utvikling og produktstrategi. Opptatt av å gjøre komplekse problemer om til enkle, brukbare løsninger.",
     initial: "G2"
   }
 ]
@@ -41,9 +41,9 @@ export function FoundersSection() {
           </span>
           <div className="w-16 h-px bg-lavender/30 mt-4 mb-8" />
           <h2 className="font-serif text-3xl md:text-5xl text-offwhite">
-            To grunnleggere.
+            Et lite team
             <br />
-            <span className="text-coral">Én visjon.</span>
+            <span className="text-coral">med bred erfaring.</span>
           </h2>
         </motion.div>
 

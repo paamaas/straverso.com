@@ -16,8 +16,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Straverso | Vi vender lagene. Finner løsningen.',
-  description: 'Norsk tech-selskap som bygger AI-drevne apper som løser nisjeproblemer andre har oversett. Dybde, helhet, hastighet.',
+  title: 'Straverso – Vi gjør det komplekse enkelt og intuitivt.',
+  description: 'Vi utvikler apper og arbeidsverktøy for miljøer der standardløsninger ofte blir for enkle. Med dyp innsikt, AI og praktisk produktutvikling lager vi løsninger som er raskere å bruke og enkle å forstå.',
   generator: 'v0.app',
   icons: {
     icon: [

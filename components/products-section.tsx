@@ -8,7 +8,7 @@ import { Home, Beer, Calendar, Train } from "lucide-react"
 const products = [
   {
     name: "Concertus",
-    description: "Intelligent verktøy for kor, koprs, band, sangere og orkestre. Stemmeøving, partiturstyring og øvingsplanlegging. Bygget av fagfolk for fagfolk",
+    description: "Et digitalt arbeidsverktøy for kor, korps, band, sangere og orkestre. Concertus samler stemmeøving, partitur, øvingsplanlegging og kommunikasjon i én løsning – utviklet med innsikt fra musikkmiljøet.",
     icon: null,
     logoSrc: "/concertus-logo.png",
     accentColor: "#FF6B6B",
@@ -25,7 +25,7 @@ const products = [
   },
   {
     name: "SmartDash",
-    description: "Et dashboard for hele smarthuset. Samler alle enheter, uansett merke, i ett elegant grensesnitt. Støtter Home Assistant, Homey og HomeKit - alt på ett sted med intelligente widgets",
+    description: "Et samlet dashboard for smarthjemmet. SmartDash gir oversikt over enheter, rom og funksjoner på tvers av systemer som Home Assistant, Homey og HomeKit med intelligente widgets.",
     icon: Home,
     accentColor: "#4ECDC4",
     status: "I utvikling",
@@ -41,7 +41,7 @@ const products = [
   },
   {
     name: "Cally",
-    description: "Kalenderen som forstår livet ditt. Smart prioritering, tidsblokkering, og AI-assistert planlegging.",
+    description: "En AI-basert kalenderassistent for planlegging, prioritering og tidsblokkering. Cally hjelper deg å strukturere dagene dine med forslag basert på tid, oppgaver og kapasitet.",
     icon: Calendar,
     accentColor: "#8B85C1",
     status: "I utvikling",
@@ -69,8 +69,8 @@ export function ProductsSection() {
           </span>
           <div className="w-16 h-px bg-lavender/30 mt-4 mb-8" />
           <h2 className="font-serif text-3xl md:text-5xl text-offwhite max-w-2xl">
-            Apper som løser problemer
-            <span className="text-coral"> andre overser</span>
+            Apper som løser
+            <span className="text-coral"> utfordringer</span>
           </h2>
         </motion.div>
 
