@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
+import { track } from "@vercel/analytics"
 import { T, type Lang, type Translations } from "@/lib/translations"
 
 const STORAGE_KEY = "sv_lang"
@@ -37,7 +38,11 @@ export function LangProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  const toggleLang = () => setLang(lang === "no" ? "en" : "no")
+  const toggleLang = () => {
+    const next: Lang = lang === "no" ? "en" : "no"
+    track("lang_toggle", { from: lang, to: next })
+    setLang(next)
+  }
 
   return (
     <LangContext.Provider value={{ lang, setLang, toggleLang, t: T[lang] }}>

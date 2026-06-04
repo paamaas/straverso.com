@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { track } from "@vercel/analytics"
 import { useLang } from "@/lib/lang-context"
 
 const reveal = {
@@ -11,7 +12,7 @@ const reveal = {
 }
 
 export function ContactSection() {
-  const { t } = useLang()
+  const { lang, t } = useLang()
   const tx = t.contact
 
   return (
@@ -30,10 +31,18 @@ export function ContactSection() {
             {tx.body}
           </p>
           <div className="flex flex-wrap justify-center" style={{ gap: 14 }}>
-            <a href="mailto:post@straverso.com" className="btn-primary">
+            <a
+              href="mailto:post@straverso.com"
+              className="btn-primary"
+              onClick={() => track("contact_click", { source: "contact_section", variant: "cta", lang })}
+            >
               {tx.cta}
             </a>
-            <a href="mailto:post@straverso.com" className="btn-secondary">
+            <a
+              href="mailto:post@straverso.com"
+              className="btn-secondary"
+              onClick={() => track("contact_click", { source: "contact_section", variant: "address", lang })}
+            >
               post@straverso.com
             </a>
           </div>

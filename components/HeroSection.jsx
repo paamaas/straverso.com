@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { track } from "@vercel/analytics";
 
 // ─────────────────────────────────────────────
 // SpiralCanvas — Three.js helix ribbon
@@ -297,6 +298,7 @@ export function HeroSection({ lang = "no" }) {
             }}
             onMouseEnter={e => { e.currentTarget.style.background = "#FF6B6B"; e.currentTarget.style.color = "#fff"; }}
             onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#FF6B6B"; }}
+            onClick={() => track("hero_cta", { which: "products", lang })}
           >
             {t.cta1}
           </a>
@@ -318,6 +320,7 @@ export function HeroSection({ lang = "no" }) {
             }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = "#8890CC"; e.currentTarget.style.color = "#F5F2EB"; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(136,144,204,0.15)"; e.currentTarget.style.color = "#8890CC"; }}
+            onClick={() => track("hero_cta", { which: "contact", lang })}
           >
             {t.cta2}
           </a>

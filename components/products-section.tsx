@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { track } from "@vercel/analytics"
 import { useLang } from "@/lib/lang-context"
 import { STATUS_COLOR } from "@/lib/translations"
 
@@ -12,7 +13,7 @@ const reveal = {
 }
 
 export function ProductsSection() {
-  const { t } = useLang()
+  const { lang, t } = useLang()
   const tx = t.prod
   const products = t.products
 
@@ -20,6 +21,7 @@ export function ProductsSection() {
     <motion.section
       id="produkter"
       {...reveal}
+      onViewportEnter={() => track("products_viewed", { lang })}
       style={{ padding: "130px 0", background: "var(--bg)" }}
     >
       <div className="strav-container">
