@@ -1,75 +1,82 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
+import { useLang } from "@/lib/lang-context"
 
-const founders = [
-  {
-    name: "Jo Henning Kolstad",
-    role: "Partner",
-    bio: "Bakgrunn innen salg, markedsføring og kommersiell utvikling. Jobber med posisjonering, brukerbehov og hvordan produktene skal nå markedet."
-  },
-  {
-    name: "Paal Aamaas",
-    role: "Partner",
-    bio: "Fullstack-utvikler med erfaring innen AI, produktutvikling, forretningsutvikling og markedsføring. Jobber med teknisk arkitektur, utvikling og produktstrategi. Opptatt av å gjøre komplekse problemer om til enkle, brukbare løsninger."
-  }
-]
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.08 },
+  transition: { duration: 0.9, ease: "easeOut" as const },
+}
 
 export function FoundersSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const { t } = useLang()
+  const tx = t.team
 
   return (
-    <section ref={ref} className="relative py-32 md:py-48 px-6">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo via-[#0D1048] to-indigo pointer-events-none" />
-      
-      <div className="relative z-10 max-w-5xl mx-auto">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
-          <span className="text-lavender text-sm tracking-[0.3em] uppercase font-sans">
-            Teamet
-          </span>
-          <div className="w-16 h-px bg-lavender/30 mt-4 mb-8" />
-          <h2 className="font-serif text-3xl md:text-5xl text-offwhite">
-            Et lite team
-            <br />
-            <span className="text-coral">med bred erfaring.</span>
-          </h2>
-        </motion.div>
+    <motion.section
+      id="team"
+      {...reveal}
+      style={{ padding: "130px 0", background: "var(--surface)" }}
+    >
+      <div className="strav-container">
+        <div className="section-label">{tx.label}</div>
+        <h2 className="section-h2">{tx.h2}</h2>
 
-        {/* Founders grid */}
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-          {founders.map((founder, index) => (
-            <motion.div
-              key={founder.name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
-              className="group"
-            >
-              <div className="relative bg-[#161A5E]/30 border border-lavender/10 rounded-2xl p-8 transition-all duration-500 hover:border-lavender/20">
-                <h3 className="font-serif text-xl text-offwhite mb-1 group-hover:text-coral transition-colors duration-300">
-                  {founder.name}
-                </h3>
-                <p className="text-lavender text-sm font-sans mb-4">
-                  {founder.role}
-                </p>
-                <p className="font-sans text-offwhite/60 leading-relaxed text-sm">
-                  {founder.bio}
-                </p>
+        <div
+          className="grid"
+          style={{
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 20,
+            marginTop: 52,
+          }}
+        >
+          {tx.members.map((m) => (
+            <div key={m.name} className="strav-card" style={{ padding: 44 }}>
+              <div
+                className="flex items-center justify-center"
+                style={{
+                  width: 48,
+                  height: 48,
+                  borderRadius: "50%",
+                  background: "linear-gradient(135deg, #8B85C1, #BDB8E4)",
+                  fontFamily: "var(--serif)",
+                  fontSize: 16,
+                  color: "#0A0C2E",
+                  marginBottom: 28,
+                }}
+              >
+                {m.initials}
               </div>
-            </motion.div>
+              <h3
+                style={{
+                  fontFamily: "var(--serif)",
+                  fontSize: 22,
+                  fontWeight: 500,
+                  color: "var(--text)",
+                  marginBottom: 6,
+                }}
+              >
+                {m.name}
+              </h3>
+              <p
+                style={{
+                  fontSize: 11,
+                  fontWeight: 600,
+                  letterSpacing: "2.5px",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  marginBottom: 18,
+                }}
+              >
+                {m.role}
+              </p>
+              <p className="body-text">{m.bio}</p>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

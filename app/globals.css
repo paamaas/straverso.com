@@ -3,78 +3,80 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Straverso Brand Colors */
-/* Deep Indigo: #0F1354 | Coral: #FF6B6B | Lavender: #8B85C1 | Warm Off-White: #F5F2EB | Warm Charcoal: #2D2A33 */
-
+/* Straverso design tokens — Nattblå (default) */
 :root {
-  /* Dark mode as primary (Deep Indigo background) */
-  --background: #0F1354;
-  --foreground: #F5F2EB;
-  --card: #161A5E;
-  --card-foreground: #F5F2EB;
-  --popover: #161A5E;
-  --popover-foreground: #F5F2EB;
-  --primary: #FF6B6B;
-  --primary-foreground: #0F1354;
-  --secondary: #8B85C1;
-  --secondary-foreground: #0F1354;
-  --muted: #1E2268;
-  --muted-foreground: #9A97A8;
-  --accent: #8B85C1;
-  --accent-foreground: #0F1354;
-  --destructive: #FF6B6B;
-  --destructive-foreground: #0F1354;
-  --border: #2D2A6E;
-  --input: #1E2268;
-  --ring: #8B85C1;
-  --chart-1: #FF6B6B;
-  --chart-2: #8B85C1;
-  --chart-3: #4ECDC4;
-  --chart-4: #FFE66D;
-  --chart-5: #95E1D3;
-  --radius: 0.75rem;
-  
-  /* Custom Straverso tokens */
-  --indigo: #0F1354;
-  --coral: #FF6B6B;
-  --lavender: #8B85C1;
-  --offwhite: #F5F2EB;
-  --charcoal: #2D2A33;
+  --bg:       #1C2260;
+  --surface:  #222870;
+  --card-bg:  rgba(255, 255, 255, 0.04);
+  --text:     #F5F2EB;
+  --text2:    #8890CC;
+  --text3:    rgba(136, 144, 204, 0.55);
+  --accent:   #FF6B6B;
+  --border:   rgba(136, 144, 204, 0.15);
+  --nav-bg:   rgba(28, 34, 96, 0.9);
+  --serif:    var(--font-playfair), 'Playfair Display', Georgia, serif;
+  --sans:     var(--font-inter), 'Inter', -apple-system, system-ui, sans-serif;
+
+  /* shadcn-compatible aliases (kept so any leftover primitives still resolve) */
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface);
+  --popover-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: #ffffff;
+  --secondary: var(--text2);
+  --secondary-foreground: var(--text);
+  --muted: var(--surface);
+  --muted-foreground: var(--text2);
+  --destructive: var(--accent);
+  --destructive-foreground: #ffffff;
+  --input: var(--surface);
+  --ring: var(--accent);
+  --radius: 0;
 }
 
-.light {
-  --background: #F5F2EB;
-  --foreground: #2D2A33;
-  --card: #FFFFFF;
-  --card-foreground: #2D2A33;
-  --popover: #FFFFFF;
-  --popover-foreground: #2D2A33;
-  --primary: #FF6B6B;
-  --primary-foreground: #FFFFFF;
-  --secondary: #8B85C1;
-  --secondary-foreground: #FFFFFF;
-  --muted: #E8E5DE;
-  --muted-foreground: #6B6875;
-  --accent: #0F1354;
-  --accent-foreground: #F5F2EB;
-  --destructive: #FF6B6B;
-  --destructive-foreground: #FFFFFF;
-  --border: #D8D5CE;
-  --input: #E8E5DE;
-  --ring: #0F1354;
+.t-kull {
+  --bg:      #06080F;
+  --surface: #0C0F1E;
+  --card-bg: rgba(255, 255, 255, 0.025);
+  --text:    #EAE6DE;
+  --text2:   #5C65A0;
+  --text3:   rgba(92, 101, 160, 0.5);
+  --accent:  #FF7575;
+  --border:  rgba(92, 101, 160, 0.14);
+  --nav-bg:  rgba(6, 8, 15, 0.92);
+}
+
+.t-kritt {
+  --bg:      #F0EDE8;
+  --surface: #FFFFFF;
+  --card-bg: rgba(12, 16, 80, 0.03);
+  --text:    #0F0D26;
+  --text2:   #4A4480;
+  --text3:   rgba(74, 68, 128, 0.5);
+  --accent:  #CC2020;
+  --border:  rgba(12, 16, 80, 0.1);
+  --nav-bg:  rgba(240, 237, 232, 0.9);
 }
 
 @theme inline {
   --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
   --font-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
-  
-  /* Straverso brand colors */
-  --color-indigo: var(--indigo);
-  --color-coral: var(--coral);
-  --color-lavender: var(--lavender);
-  --color-offwhite: var(--offwhite);
-  --color-charcoal: var(--charcoal);
+
+  /* Expose design tokens as Tailwind colors */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-card-bg: var(--card-bg);
+  --color-text: var(--text);
+  --color-text2: var(--text2);
+  --color-text3: var(--text3);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-nav-bg: var(--nav-bg);
+
+  /* shadcn-compatible Tailwind color tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -87,37 +89,134 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-wrap: pretty;
+    transition: background 0.5s, color 0.3s;
   }
 }
+
+/* Layout primitives from design system (sharp corners, no shadows) */
+.strav-container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 52px;
+}
+@media (max-width: 680px) {
+  .strav-container {
+    padding: 0 24px;
+  }
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+.section-label::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.section-h2 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.5vw, 44px);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.3px;
+  margin-bottom: 22px;
+}
+
+.body-text {
+  font-size: 16px;
+  color: var(--text2);
+  line-height: 1.8;
+}
+
+.strav-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 32px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 14px 42px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+  background: transparent;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 14px 42px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+  background: transparent;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  border-color: var(--text2);
+  color: var(--text);
+}
+
+/* Responsive overrides for HeroSection.jsx — collapse to single column when spiral no longer fits */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-text {
+    padding: 100px 24px 60px !important;
+  }
+  .hero-visual {
+    display: none !important;
+  }
+}
+

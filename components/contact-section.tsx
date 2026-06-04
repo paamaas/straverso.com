@@ -1,151 +1,44 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { ArrowRight, Mail } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
+import { useLang } from "@/lib/lang-context"
+
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.08 },
+  transition: { duration: 0.9, ease: "easeOut" as const },
+}
 
 export function ContactSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [message, setMessage] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const { toast } = useToast()
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    if (!name || !email || !message) {
-      toast({
-        title: "Feil",
-        description: "Vennligst fyll ut alle feltene",
-        variant: "destructive",
-      })
-      return
-    }
-
-    setIsLoading(true)
-    try {
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, message }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || "Noe gikk galt")
-      }
-
-      toast({
-        title: "Suksess!",
-        description: data.message,
-      })
-      
-      setName("")
-      setEmail("")
-      setMessage("")
-    } catch (error) {
-      toast({
-        title: "Feil",
-        description: error instanceof Error ? error.message : "Kunne ikke sende meldingen",
-        variant: "destructive",
-      })
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  const { t } = useLang()
+  const tx = t.contact
 
   return (
-    <section ref={ref} className="relative py-32 md:py-48 px-6">
-      <div className="max-w-3xl mx-auto text-center">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="text-lavender text-sm tracking-[0.3em] uppercase font-sans">
-            Kontakt
-          </span>
-          <div className="w-16 h-px bg-lavender/30 mt-4 mb-8 mx-auto" />
-          <h2 className="font-serif text-3xl md:text-5xl text-offwhite mb-6">
-            La oss ta en prat
-          </h2>
-          <p className="font-sans text-offwhite/60 mb-12 max-w-lg mx-auto">
-            Har du en nisje, arbeidsflyt eller produktidé som fortjener en bedre digital løsning?
-            Ta gjerne kontakt – enten du er nysgjerrig på produktene våre eller vil diskutere et konkret behov.
-          </p>
-        </motion.div>
-
-        {/* Contact form */}
-        <motion.form
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-6"
-          onSubmit={handleSubmit}
-        >
-          <Input
-            type="text"
-            placeholder="Ditt navn"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            disabled={isLoading}
-            className="w-full h-14 bg-[#161A5E]/50 border-lavender/20 text-offwhite placeholder:text-offwhite/30 rounded-xl px-6 focus:border-coral focus:ring-coral/20 disabled:opacity-50"
-          />
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Input
-              type="email"
-              placeholder="din@epost.no"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={isLoading}
-              className="flex-1 h-14 bg-[#161A5E]/50 border-lavender/20 text-offwhite placeholder:text-offwhite/30 rounded-xl px-6 focus:border-coral focus:ring-coral/20 disabled:opacity-50"
-            />
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="h-14 px-8 bg-coral hover:bg-coral/90 text-indigo font-semibold rounded-xl transition-all duration-300 hover:scale-105 group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-            >
-              <span>{isLoading ? "Sender..." : "Send melding"}</span>
-              <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-            </Button>
+    <motion.section
+      id="kontakt"
+      {...reveal}
+      style={{ padding: "160px 0", background: "var(--bg)" }}
+    >
+      <div className="strav-container">
+        <div style={{ maxWidth: 580, margin: "0 auto", textAlign: "center" }}>
+          <div className="section-label" style={{ justifyContent: "center" }}>
+            {tx.label}
           </div>
-          <textarea
-            placeholder="Din melding..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            disabled={isLoading}
-            rows={4}
-            className="w-full bg-[#161A5E]/50 border border-lavender/20 text-offwhite placeholder:text-offwhite/30 rounded-xl px-6 py-4 focus:border-coral focus:ring-coral/20 focus:outline-none resize-none disabled:opacity-50"
-          />
-        </motion.form>
-
-        {/* Direct email */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 flex items-center justify-center gap-3 text-offwhite/50"
-        >
-          <Mail className="w-4 h-4" />
-          <span className="font-sans text-sm">
-            Eller skriv direkte til{" "}
-            <a href="mailto:post@straverso.com" className="text-lavender hover:text-coral transition-colors">
-              post@straverso.no
+          <h2 className="section-h2">{tx.h2}</h2>
+          <p className="body-text" style={{ margin: "0 auto 52px", textAlign: "center" }}>
+            {tx.body}
+          </p>
+          <div className="flex flex-wrap justify-center" style={{ gap: 14 }}>
+            <a href="mailto:post@straverso.com" className="btn-primary">
+              {tx.cta}
             </a>
-          </span>
-        </motion.div>
+            <a href="mailto:post@straverso.com" className="btn-secondary">
+              post@straverso.com
+            </a>
+          </div>
+        </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

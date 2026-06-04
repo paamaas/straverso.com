@@ -1,126 +1,100 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useLang } from "@/lib/lang-context"
 
-const navLinks = [
-  { label: "Produkter", href: "#products" },
-  { label: "Om oss", href: "#philosophy" },
-  { label: "Team", href: "#team" },
-  { label: "Kontakt", href: "#contact" },
-]
+const ANCHORS = ["#om-oss", "#produkter", "#team", "#kontakt"]
 
 export function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { lang, toggleLang, t } = useLang()
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    const handler = () => setScrolled(window.scrollY > 40)
+    handler()
+    window.addEventListener("scroll", handler, { passive: true })
+    return () => window.removeEventListener("scroll", handler)
   }, [])
 
   return (
-    <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? "bg-indigo/80 backdrop-blur-lg border-b border-lavender/10" 
-            : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          {/* Logo */}
-          <a href="#" className="flex items-center hover:opacity-80 transition-opacity">
-            <img 
-              src="/straverso-logo.svg" 
-              alt="Straverso" 
-              className="h-16 lg:h-20 w-auto"
-            />
-          </a>
-          
-          {/* Desktop navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="font-sans text-sm text-offwhite/70 hover:text-coral transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          
-          {/* Language toggle - desktop */}
-          <div className="hidden md:flex items-center gap-4">
-            <button className="font-sans text-sm text-lavender hover:text-coral transition-colors">
-              EN
-            </button>
-            <span className="text-lavender/30">|</span>
-            <button className="font-sans text-sm text-offwhite">
-              NO
-            </button>
-          </div>
-          
-          {/* Mobile menu button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-offwhite hover:text-coral hover:bg-transparent"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </Button>
+    <nav
+      className="fixed top-0 left-0 right-0 z-[500] py-[10px] transition-[background,border-color] duration-300"
+      style={
+        scrolled
+          ? {
+              background: "var(--nav-bg)",
+              borderBottom: "1px solid var(--border)",
+              backdropFilter: "blur(18px)",
+              WebkitBackdropFilter: "blur(18px)",
+            }
+          : { background: "transparent" }
+      }
+    >
+      <div className="strav-container flex items-center">
+        <a
+          href="#topp"
+          className="flex items-center gap-[10px] mr-auto no-underline"
+          style={{
+            fontFamily: "var(--serif)",
+            fontSize: 27,
+            fontWeight: 500,
+            color: "var(--text)",
+          }}
+        >
+          <img
+            src="/hero-s.svg"
+            alt="Straverso logo"
+            style={{ height: 42, width: "auto", display: "block", flexShrink: 0 }}
+          />
+          <span>Straverso</span>
+        </a>
+
+        <div className="hidden md:flex gap-10">
+          {t.nav.map((label, i) => (
+            <a
+              key={label}
+              href={ANCHORS[i]}
+              className="no-underline transition-colors duration-200 hover:text-[color:var(--accent)] whitespace-nowrap"
+              style={{
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "2px",
+                textTransform: "uppercase",
+                color: "var(--text2)",
+              }}
+            >
+              {label}
+            </a>
+          ))}
         </div>
-      </motion.header>
-      
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-indigo pt-24 px-6 md:hidden"
-          >
-            <nav className="flex flex-col gap-6">
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="font-serif text-3xl text-offwhite hover:text-coral transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </motion.a>
-              ))}
-            </nav>
-            
-            {/* Language toggle - mobile */}
-            <div className="flex items-center gap-4 mt-12">
-              <button className="font-sans text-lg text-lavender hover:text-coral transition-colors">
-                English
-              </button>
-              <span className="text-lavender/30">|</span>
-              <button className="font-sans text-lg text-offwhite">
-                Norsk
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+
+        <button
+          type="button"
+          onClick={toggleLang}
+          aria-label={lang === "no" ? "Switch to English" : "Bytt til norsk"}
+          className="ml-7 transition-colors duration-200 cursor-pointer"
+          style={{
+            background: "transparent",
+            border: "1px solid var(--border)",
+            color: "var(--text2)",
+            fontFamily: "var(--sans)",
+            fontSize: 10,
+            fontWeight: 600,
+            letterSpacing: "2px",
+            padding: "6px 12px",
+          }}
+          onMouseEnter={(e) => {
+            ;(e.currentTarget as HTMLButtonElement).style.borderColor = "var(--accent)"
+            ;(e.currentTarget as HTMLButtonElement).style.color = "var(--accent)"
+          }}
+          onMouseLeave={(e) => {
+            ;(e.currentTarget as HTMLButtonElement).style.borderColor = "var(--border)"
+            ;(e.currentTarget as HTMLButtonElement).style.color = "var(--text2)"
+          }}
+        >
+          {lang === "no" ? "EN" : "NO"}
+        </button>
+      </div>
+    </nav>
   )
 }
