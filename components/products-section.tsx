@@ -49,10 +49,20 @@ export function ProductsSection() {
         >
           {products.map((p) => {
             const sc = STATUS_COLOR[p.status]
+            const Tag = p.url ? "a" : "div"
             return (
-              <div
+              <Tag
                 key={p.name}
                 className="strav-card"
+                {...(p.url
+                  ? {
+                      href: p.url,
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      onClick: () => track("product_clicked", { lang, product: p.name }),
+                      style: { display: "block", cursor: "pointer", textDecoration: "none" },
+                    }
+                  : {})}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = "rgba(255,107,107,0.35)"
                   e.currentTarget.style.transform = "translateY(-3px)"
@@ -91,19 +101,27 @@ export function ProductsSection() {
                   </span>
                 </div>
 
-                <h3
-                  style={{
-                    fontFamily: "var(--serif)",
-                    fontSize: 26,
-                    fontWeight: 500,
-                    color: "var(--text)",
-                    marginBottom: 10,
-                  }}
-                >
-                  {p.name}
-                </h3>
+                {p.logo ? (
+                  <img
+                    src={p.logo}
+                    alt={p.name}
+                    style={{ height: 44, width: "auto", marginBottom: 10, display: "block" }}
+                  />
+                ) : (
+                  <h3
+                    style={{
+                      fontFamily: "var(--serif)",
+                      fontSize: 26,
+                      fontWeight: 500,
+                      color: "var(--text)",
+                      marginBottom: 10,
+                    }}
+                  >
+                    {p.name}
+                  </h3>
+                )}
                 <p style={{ fontSize: 14, color: "var(--text2)", lineHeight: 1.75 }}>{p.desc}</p>
-              </div>
+              </Tag>
             )
           })}
         </div>

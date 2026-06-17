@@ -1,6 +1,6 @@
 export type Lang = "no" | "en"
 
-export type StatusKey = "Kommer snart" | "Coming soon" | "I utvikling" | "In development"
+export type StatusKey = "Live" | "Kommer snart" | "Coming soon" | "I utvikling" | "In development"
 
 export interface Translations {
   nav: [string, string, string, string]
@@ -28,6 +28,8 @@ export interface Translations {
     cat: string
     status: StatusKey
     desc: string
+    url?: string
+    logo?: string
   }[]
   team: {
     label: string
@@ -72,7 +74,7 @@ export const T: Record<Lang, Translations> = {
       sub: "Fem produkter i utvikling. Fem nisjer som fortjener bedre løsninger.",
     },
     products: [
-      { name: "Concertus", cat: "Musikk", status: "Kommer snart", desc: "Et digitalt arbeidsverktøy for kor, korps, band, sangere og orkestre. Samler stemmeøving, partitur, øvingsplanlegging og kommunikasjon i én løsning." },
+      { name: "Concertus", cat: "Musikk", status: "Live", desc: "Et digitalt arbeidsverktøy for kor, korps, band, sangere og orkestre. Samler stemmeøving, partitur, øvingsplanlegging og kommunikasjon i én løsning.", url: "https://concertus.app", logo: "/concertus-mark.svg" },
       { name: "Omnibus", cat: "Transport", status: "Kommer snart", desc: "Sanntids kollektivavganger. Enkel, rask og alltid oppdatert – uansett hvor du er i Norge. Widgets som viser dine avganger." },
       { name: "SmartDash", cat: "Smart hjem", status: "I utvikling", desc: "Et samlet dashboard for smarthjemmet. Oversikt over enheter, rom og funksjoner på tvers av Home Assistant, Homey og HomeKit." },
       { name: "HomeTap", cat: "Mat & drikke", status: "I utvikling", desc: "Hjemmebrygging perfeksjonert. Oppskrifter, batcher, fat, flasker og lokasjoner – alt i én app, uansett hva du lager." },
@@ -122,7 +124,7 @@ export const T: Record<Lang, Translations> = {
       sub: "Five products in development. Five niches that deserve better solutions.",
     },
     products: [
-      { name: "Concertus", cat: "Music", status: "Coming soon", desc: "A digital work tool for choirs, bands, orchestras, and soloists. Brings voice practice, sheet music, scheduling, and communication into one platform." },
+      { name: "Concertus", cat: "Music", status: "Live", desc: "A digital work tool for choirs, bands, orchestras, and soloists. Brings voice practice, sheet music, scheduling, and communication into one platform.", url: "https://concertus.app", logo: "/concertus-mark.svg" },
       { name: "Omnibus", cat: "Transport", status: "Coming soon", desc: "Real-time public transit departures. Simple, fast, and always updated — wherever you are in Norway. Widgets that show your departures." },
       { name: "SmartDash", cat: "Smart home", status: "In development", desc: "A unified dashboard for your smart home. Overview of devices, rooms, and functions across Home Assistant, Homey, and HomeKit." },
       { name: "HomeTap", cat: "Food & drink", status: "In development", desc: "Home brewing perfected. Recipes, batches, barrels, bottles, and locations — all in one app, whatever you're making." },
@@ -147,6 +149,7 @@ export const T: Record<Lang, Translations> = {
 }
 
 export const STATUS_COLOR: Record<StatusKey, { c: string; bg: string; b: string }> = {
+  Live: { c: "#7EE0B0", bg: "rgba(126,224,176,0.12)", b: "rgba(126,224,176,0.3)" },
   "Kommer snart": { c: "#BDB8E4", bg: "rgba(189,184,228,0.1)", b: "rgba(189,184,228,0.25)" },
   "Coming soon": { c: "#BDB8E4", bg: "rgba(189,184,228,0.1)", b: "rgba(189,184,228,0.25)" },
   "I utvikling": { c: "#E8A87C", bg: "rgba(232,168,124,0.1)", b: "rgba(232,168,124,0.25)" },
